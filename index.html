@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="fr">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Intro à Angular</title>
+
+        <meta name="description" content="Une présentation d'Angular destinée à un public débutant en javascript et se concentrant sur l'aspect 'pratique'">
+        <meta name="author" content="Pierric Cistac">
+
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/custom.css">
+        <link rel="stylesheet" href="css/theme/night.css" id="theme">
+
+        <!-- Code syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/railscasts.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+
+        <div class="reveal">
+            <small id="step" style="text-transform: uppercase; padding: 15px;"></small>
+
+            <!-- Any section element inside of this container is displayed as a slide -->
+            <div class="slides">
+                <section title>
+                    <h1>Welcome !</h1>
+                    <blockquote>I have nothing to offer but blood, toil, tears, and sweat.</blockquote>
+                    <p class="fragment roll-in">W. Churchill, 13 mai 1940</p>
+                </section>                
+
+                <section title>
+                    <h2>Evolution of Web Apps</h2>
+                    <a href="https://evolution-of-apps.firebaseapp.com">https://evolution-of-apps.firebaseapp.com</a>
+                    <p>David East - Firebase & Angular team</p>
+                </section>
+                
+                <section>
+                    <section title="AngularJS > Introduction">
+                        <h2>So... Angular !</h2>
+                        <img class="stretch" src="img/trends.png" alt="">
+                    </section>
+                    
+                    <section title="AngularJS > Introduction">
+                        <h2>En 4 mots clés</h2>
+                        <ul>
+                            <li>Framework Javascript</li>
+                            <li>SPA</li>
+                            <li><a href="https://plus.google.com/+AngularJS/posts/aZNVhj355G2" title="Model-View-Whatever par Igor Minar">MVW</a> (o_O)</li>
+                            <li>Google</li>
+                        </ul>
+                        <br><br>
+                        <p style="font-size: initial;">Au sujet de MVC / MVVM :</p>
+                        <div style="font-size: initial;">
+                            <a href="http://www.docdoku.com/blog/2015/02/17/architecturer-ses-applications-js-pattern-mvvm/">http://www.docdoku.com/blog/2015/02/17/architecturer-ses-applications-js-pattern-mvvm/</a>
+                            <a href="http://stackoverflow.com/questions/667781/what-is-the-difference-between-mvc-and-mvvm/">http://stackoverflow.com/questions/667781/what-is-the-difference-between-mvc-and-mvvm/</a>
+                        </div>
+                    </section>
+                    
+                    <section title="AngularJS > Introduction">
+                        <p>Aujourd'hui, version 1.X - <a href="https://angularjs.org/">https://angularjs.org/</a></p>
+                        <p>Demain, version 2.X - <a href="https://angular.io/">https://angular.io/</a></p>
+                        <div class="fragment roll-in">
+                            <blockquote>AngularJS however is not an example of developers maintaining backwards compatibility. It takes pleasure in starting over. In fact, you can just about rip up your old Angular apps now. It’s for your own good.</blockquote>
+                            <p style="font-size: initial;"><a href="https://twitter.com/edwardcgordon">@EdwardCGordon</a> - <a href="http://bit.ly/1QJbGBD">packtpub.com</a></p>
+                        </div>
+                        <p class="fragment roll-in">La classe non ?</p>
+                    </section>
+                    
+                    <section title="AngularJS">
+                        <h2>Ready for roller coasters ?</h2>
+                        <img src="http://www.bennadel.com/resources/uploads/2013/feelings_about_angularjs_over_time.png" alt="">
+                    </section>
+                </section>
+                
+                <section>
+                    <section title="AngularJs > Introduction">
+                        <h3>Sans Angular...</h3>
+                        <pre style="font-size: initial !important;"><code data-trim class="hljs xml javascript">
+&lt;html&gt;
+    &lt;head&gt;
+        <title>Index</title>
+    &lt;/head&gt;
+    &lt;body&gt;
+        Name: <input type="text" id="myInputBox">
+        Hello <span id="nameSpan"></span> !            
+        <script>
+            var inputElem = document.getElementById("myInputBox");
+            inputElem.addEventListener('keyup', function() {
+                var text = inputElem.value;
+                document.getElementById("nameSpan").innerHTML = text;
+            });
+        </script>
+    &lt;/body&gt;
+&lt;/html&gt;
+                        </code></pre>
+                        <br>
+                        <div class="fragment roll-in">
+                            <h3>Avec Angular !</h3>
+                            <pre style="font-size: initial !important;"><code data-trim class="hljs xml javascript">
+&lt;html&gt;
+    &lt;head&gt;
+        <title>Index</title>
+        <script src="../angular.min.js"></script>
+    &lt;/head&gt;
+    &lt;body ng-app="monApplicationAngular"&gt;
+        Name: <input type="text" ng-model="nameModel">
+        Hello {{ nameModel }} !
+    &lt;/body&gt;
+&lt;/html&gt;
+                            </code></pre>
+                        </div>                    
+                    </section>
+                    
+                    <section title="AngularJs > Introduction">
+                        <pre><code data-trim class="hljs xml javascript">
+&lt;html&gt;
+    &lt;head&gt;
+        <title>Index</title>
+        <script src="../angular.min.js"></script>
+    &lt;/head&gt;
+    &lt;body ng-app="monApplicationAngular"&gt;
+        Name: <input type="text" ng-model="nameModel">
+        Hello {{ nameModel }} !
+    &lt;/body&gt;
+&lt;/html&gt;
+                        </code></pre>
+                        <ul>
+                            <li class="fragment roll-in"><span class="keyword">ng-app</span> : directive de bootstrap ("démarrage"), indique à angular où se situe l'application dans la page HTML.</li>
+                            <li class="fragment roll-in"><span class="keyword">ng-model</span> : directive qui associe ("bind") la valeur d'un champ à une variable.</li>
+                            <li class="fragment roll-in"><span class="keyword">{{ nameModel }}</span> : expression angular, elle est évaluée par angular et son résultat est inséré dans la page.</li>
+                        </ul>
+                    </section>
+                    
+                    <section title="AngularJs > Introduction">
+                        <h2>&lt;demo /&gt;</h2>
+                    </section>
+                </section>
+                
+                <section>
+                    <section title="AngularJs > Modules">
+                        <h2>Les modules</h2>
+                        <pre><code data-trim class="hljs xml">&lt;body ng-app="monApplicationAngular"&gt;</code></pre>
+                        <p>La valeur passée à <span class="keyword">ngApp</span> est le nom du <span class="keyword">module</span> principal de l'application.</p>
+                        <p>Un module contient les composants de notre application : controllers, directives, services, filtres...</p>                        
+                    </section>
+                    
+                    <section title="AngularJs > Modules">
+                        <p>Pour pouvoir ajouter ces composants, il faut <span class="keyword">déclarer le module</span> côté javascript :</p>
+                        <pre><code data-trim class="hljs javascript">
+var app = angular.module("monApplicationAngular", [
+    "ngRoute",
+    "ngResource",
+    //...
+]);
+
+// Dans sa forme la plus simple :
+// var app = angular.module("monApplicationAngular", []); 
+                        </code></pre>
+                        <div class="fragment roll-in" style="margin-top: 50px;">
+                            <p>Une fois déclaré, on peut l'appeler et lier des composants :</p>
+                            <pre><code data-trim class="hljs javascript">
+angular
+    .module("monApplicationAngular")
+    .directive("uneDirective", maDirective);
+    
+function maDirective() {
+    //...
+}
+                            </code></pre>
+                        </div>
+                    </section>
+                </section>                
+                
+                <section title="AngularJs > Expressions">
+                    <h2>Les expressions Angular</h2>
+                    <pre><code data-trim class="hljs xml">
+&lt;body ng-app="monApplicationAngular"&gt;
+    1 + 2 = {{ 1 + 2 }}
+    Nom de l'utilisateur : {{ user.name }}
+    Loisir n° 3 de l'utilisateur : {{ user.loisirs[2] }}
+&lt;/body&gt;
+                    </code></pre>
+                    <p class="fragment roll-in">Comment et où déclarer <span class="keyword">user</span> ?</p>
+                    <p class="fragment roll-in">=> Dans le <span class="keyword">scope</span></p>
+                </section>
+                
+                <section>
+                    <section title="AngularJs > Controllers">
+                        <h2>Les controllers</h2>
+                        <p>C'est là que l'on modifie le <span class="keyword">scope</span></p>
+                        <pre><code data-trim class="hjs javascript">
+angular
+    .module("monApplicationAngular")
+    .controller("HomeController", HomeController);
+
+function HomeController() {
+    var vm = this; // vm pour ViewModel
+    vm.user = {
+        name: "Pierric",
+        loisirs: ['ski', 'lecture', 'musique']
+    }
+}
+                        </code></pre>
+                        <p>Tout ce qui est dans le <span class="keyword">this</span> de HomeController est lié au scope associé au controller</p>
+                    </section>
+                    
+                    <section title="AngularJs > Controllers">
+                        <p>Il faut penser à déclarer le controller dans le HTML grâce à la directive <span class="keyword">ngController</span></p>
+                        <pre><code data-trim class="hljs xml">
+&lt;body ng-app="monApplicationAngular"&gt;
+    <div ng-controller="HomeController as home">
+        Nom de l'utilisateur : {{ home.user.name }}
+        Loisir n° 3 de l'utilisateur : {{ home.user.loisirs[2] }}
+    </div>
+&lt;/body&gt;
+                        </code></pre>
+                        <div class="fragment roll-in">
+                            <p>Ici on utilise la syntaxe <span class="keyword">controllerAs</span>, en spécifiant un alias pour notre controller, ici <span class="keyword">home</span></p>
+                            <div style="font-size: smaller; margin-top: 40px;">
+                                <a href="http://www.johnpapa.net/do-you-like-your-angular-controllers-with-or-without-sugar/">Do You Like Your Angular Controllers with or without Sugar?</a> - <a href="https://twitter.com/John_Papa" style="font-style: italic;">@John_Papa</a>
+                            </div>
+                        </div>                        
+                    </section>
+                    
+                    <section title="AngularJs > $scope">
+                        <h3>$scope</h3>
+                        <p>Dans le javascript, on aurait pu aussi lier le modèle à <span class="keyword">$scope</span> directement, sans utiliser la syntaxe controllerAs :</p>
+                        <pre><code data-trim class="hljs javascript">
+function HomeController($scope) {
+    $scope.user = {
+        name: "Pierric",
+        loisirs: ['ski', 'lecture', 'musique']
+    }
+}
+                        </code></pre>
+                        <p>Côté HTML :</p>
+                        <pre><code data-trim class="hljs xml">
+<div ng-controller="HomeController">
+    Nom de l'utilisateur : {{ user.name }}
+    Loisir n° 3 de l'utilisateur : {{ user.loisirs[2] }}
+</div>
+                        </code></pre>
+                    </section>
+                    
+                    <section title="AngularJs > $scope">
+                        <h3>Les limites de $scope</h3>
+                        <pre><code data-trim class="hljs xml">
+<div ng-controller="MainCtrl">
+    {{ title }}
+    <div ng-controller="AnotherCtrl">
+        {{ title }}
+        <div ng-controller="YetAnotherCtrl">
+            {{ title }}
+        </div>
+    </div>
+</div>
+                        </code></pre>
+                        <div class="fragment roll-in">
+                            <p>
+                                On préfèrera limiter <span class="keyword">$scope</span> à l'utilisation de méthodes qui en dépendent telles que <span class="keyword">$watch</span>, <span class="keyword">$on</span> ou <span class="keyword">$broadcast</span>
+                            </p>
+                            <pre><code data-trim class="hljs javascript">
+function HomeController($scope) {
+    var vm = this;
+    vm.username = "Pierric";
+    $scope.$on('someEventFiredFromElsewhere', function (event, data) {
+        // do something!
+    });
+}
+                            </code></pre>
+                            <p style="font-size: smaller;"><a href="http://toddmotto.com/digging-into-angulars-controller-as-syntax/">Digging into Angular’s “Controller as” syntax</a> - <a href="https://twitter.com/toddmotto" style="font-style: italic;">@toddmotto</a></p>
+                        </div>                        
+                    </section>
+                    
+                    <section title="AngularJs > $scope">
+                        <h2>&lt;demo /&gt;</h2>
+                    </section>
+                </section>
+                
+                <section>
+                    <section title="AngularJs > Directives">
+                        <h2>Les directives</h2>
+                        <p>ngApp, ngController, ngModel, ... sont des directives</p>
+                        <p>Ce sont des marqueurs positionnés sur des <span class="keyword">éléments du DOM</span> qui indiquent à angular quel comportement attacher à un élément et/ou quelle transformation y apporter</p>
+                        <p>De nombreuses directives sont intégrées nativement : <a href="https://code.angularjs.org/1.3.14/docs/api/ng/directive" title="Liste des directives de base">https://code.angularjs.org/1.3.14/docs/api/ng/directive</a></p>
+                    </section>
+                    
+                    <section title="AngularJs > Directives">
+                        <h3>Directives de template</h3>
+                        <ul>
+                            <li>
+                                <a href="https://code.angularjs.org/1.3.14/docs/api/ng/directive/ngIf">ngIf</a> : insère ou pas un élément dans le DOM en fonction de la valeur de l'attribut
+                                <pre><code class="hljs xml"><div ng-if="isVisible">I'm gonna disappear</div></code></pre>
+                            </li>
+                            <li class="fragment roll-in">
+                                <a href="https://code.angularjs.org/1.3.14/docs/api/ng/directive/ngRepeat">ngRepeat</a> : permet de parcourir les éléments d'un tableau et d'afficher leur valeur
+                                <pre><code class="hljs xml"><div ng-repeat="user in users">{{ user.name }}</div></code></pre>                                
+                            </li>
+                            <li class="fragment roll-in">
+                                <a href="https://code.angularjs.org/1.3.14/docs/api/ng/directive/ngSwitch">ngSwitch</a> : modifie le contenu d'un élément suivant la valeur d'une expression
+                                <pre><code data-trim class="hljs xml">
+<div ng-switch="isEditable">
+    <div ng-switch-when="false">Name : {{ user.name }}</div>
+    <div ng-switch-when="true"><input type="text" ng-model="user.name"/></div>
+</div>
+                                </code></pre>                                                                    
+                            </li>
+                        </ul>
+                    </section>
+                    
+                    <section title="AngularJs > Directives">
+                        <h3>Directives de style</h3>
+                        <ul>
+                            <li>
+                                <a href="https://code.angularjs.org/1.3.14/docs/api/ng/directive/ngShow">ngShow</a> / <a href="https://code.angularjs.org/1.3.14/docs/api/ng/directive/ngHide">ngHide</a> : modifie la visibilité d'un élément du DOM suivant la valeur de l'expression en paramètre
+                                <pre><code data-trim class="hljs xml">
+<div ng-hide="hidden">Hello hide</div>
+<div ng-show="hidden">Hello show</div>
+                                </code></pre>                                
+                            </li>
+                            <li class="fragment roll-in">
+                                <a href="https://code.angularjs.org/1.3.14/docs/api/ng/directive/ngClass">ngClass</a> : conditionne dynamiquement les classes d'un élément du DOM suivant la valeur d'expressions
+                                <pre><code class="hljs xml"><p ng-class="{bold: important, red: error}">Map Syntax Example</p></code></pre>
+                            </li>
+                            <li class="fragment roll-in">
+                                <a href="https://code.angularjs.org/1.3.14/docs/api/ng/directive/ngDisabled">ngDisabled</a> : modifie la valeur de l'attribut disabled suivant l'expression spécifiée
+                                <pre><code class="hljs xml"><button ng-disabled="isDisabled">Disabled</button></code></pre>     
+                            </li>
+                        </ul>
+                    </section>
+                    
+                    <section title="AngularJs > Directives">
+                        <h3>Directives d'action</h3>
+                        <ul>
+                            <li>
+                                <a href="https://code.angularjs.org/1.3.14/docs/api/ng/directive/ngClick">ngClick</a> : permet d'appeler une fonction ou d'évaluer une expression lors d'un clic sur l'élément
+                                <pre><code data-trim class="hljs xml">
+<div ng-click="click()">Click me!</div>
+<button ng-click="count = count + 1" ng-init="count = 0">Increment</button>
+                                </code></pre>
+                            </li>
+                            <li class="fragment roll-in">
+                                <a href="https://code.angularjs.org/1.3.14/docs/api/ng/directive/ngKeydown">ngKeydown</a> / <a href="https://code.angularjs.org/1.3.14/docs/api/ng/directive/ngKeyup">ngKeyup</a> : associe des actions à des événements claviers
+                                <pre><code class="hljs xml"><input type="text" ng-keydown="down()" ng-keyup="up()"></code></pre>                                     
+                            </li>       
+                            <li class="fragment roll-in">
+                                <a href="https://code.angularjs.org/1.3.14/docs/api/ng/directive/ngSubmit">ngSubmit</a> : spécifie l'action à effectuer pour l'envoi d'un formulaire. Ne pas combiner avec ngClick !
+                                <pre><code data-trim class="hljs xml">
+<form ng-submit="submit()" ng-controller="SimpleFormController">
+    <input type="text" ng-model="text" name="text" />
+    <input type="submit" id="submit" value="Submit" />
+</form>
+                                </code></pre>
+                            </li>
+                        </ul>
+                    </section>
+                    
+                    <section title="AngularJs > Directives">
+                        <h2>&lt;demo /&gt;</h2>
+                    </section>
+                </section>
+                
+                <section>
+                    <section title="AngularJs > Filtres">
+                        <h2>Les Filtres</h2>
+                        <p>Les filtres permettent de formatter et de... filtrer (!) les expressions auxquelles ils sont appliqués :</p>
+                        <pre><code data-trim class="hljs xml">
+{{ expression | filter }}
+{{ expression | filter1 | filter2 }} <!-- Ils peuvent être combinés -->
+{{ expression | filter:arg1:arg2 }} <!-- On peut passer des arguments -->
+                            </code></pre>
+                        <div class="fragment roll-in">
+                            <p>Exemples :</p>
+                            <pre><code data-trim class="hljs xml">
+{{ 'Mon texte' | uppercase | trim }} <!-- trim supprime les espaces inutiles -->
+{{ '25.465' | number:2 | currency:'$'}} <!-- seulement 2 décimales -->
+                            </code></pre>
+                        </div>
+                        <div class="fragment roll-in" style="margin-top: 60px;">
+                            <p>Liste des filtres natifs : <br>
+                                <a href="https://docs.angularjs.org/api/ng/filter">https://docs.angularjs.org/api/ng/filter</a>
+                            </p>
+                        </div>                        
+                    </section>
+                    
+                    <section title="AngularJs > Filtres">
+                        <p>Soit le tableau suivant dans un controller:</p>
+                        <pre><code data-trim class="hljs javascript">
+var jb = {name: 'JB', gender: 'male'},
+    cyril = {name: 'Cyril', gender: 'male', birth: '1990-11-25'},
+    agnes = {name: 'Agnes', gender: 'female', birth: '1991-07-22'},
+    cedric = {name: 'Cedric', gender: 'male', birth: '1992-02-22'};
+vm.ninjas = [jb, cyril, agnes, cedric];
+                        </code></pre>
+                        <p>Avec le HTML suivant :</p>
+                        <pre><code data-trim class="hljs xml">
+<p>{{ ninjas | orderBy:'name' | limitTo:2 }}</p>
+<div ng-repeat="ninja in ninjas">
+    {{ ninja.birth | date:'yyyy' }}
+</div>
+                        </code></pre>
+                        <p>On obtiendra :</p>
+                        <pre class="fragment roll-in"><code data-trim class="hljs javascript">
+[
+    {"name":"Agnes","gender":"female","birth":"1990-07-22"},
+    {"name":"Cedric","gender":"male","birth":"1990-02-22"}
+]
+1990
+1991
+1992
+                        </code></pre>
+                    </section>
+                    
+                    <section title="AngularJs > Filtres">
+                        <h3>Le filtre Filter</h3>
+                        <p><span class="keyword">filter</span> permet d'appliquer un filtre personnalisé aux éléments d'un tableau</p>
+                        <pre><code data-trim class="hljs xml">
+<input type="text" ng-model="searchText">
+<table id="searchTextResults">
+    <tr><th>Name</th><th>Birth date</th></tr>
+    <tr ng-repeat="ninja in ninjas | filter:searchText">
+        <td>{{ friend.name }}</td>
+        <td>{{ friend.birth | date:'dd/MM/yyyy' }}</td>
+    </tr>
+</table>
+                        </code></pre>
+                        
+                        <pre><code data-trim class="hljs xml">
+<label>Any: <input ng-model="search.$"></label><br>
+<label>Name only <input ng-model="search.name"></label><br>
+<label>Gender only <input ng-model="search.gender"></label><br>
+<label>Equality <input type="checkbox" ng-model="strict"></label><br>
+<table id="searchObjResults">
+    <tr><th>Name</th><th>Gender</th></tr>
+    <tr ng-repeat="ninja in ninjas | filter:search:strict">
+        <td>{{ ninja.name }}</td>
+        <td>{{ ninja.gender }}</td>
+    </tr>
+</table>
+                        </code></pre>
+                    </section>
+                    
+                    <section title="AngularJs > Filtres">
+                        <h2>&lt;demo /&gt;</h2>
+                    </section>
+                </section>
+                
+                <section title="AngularJs > Exercice">
+                    <h2>Time for practice !</h2>
+                    <p><a href="http://www.codecademy.com/fr/learn/learn-angularjs">Learn AngularJS | Codecademy</a> - Units 1 / 2</p>
+                    <p><a href="http://campus.codeschool.com/courses/shaping-up-with-angular-js/">Shaping up with AngularJS | CodeSchool</a> - Levels 1 / 2 / 3 / 4</p>
+                </section>
+                
+                <section>
+                    <section title="AngularJs > Services">  
+                        <h2>Les services</h2>
+                        <p>Les services sont des objets dans lesquels on met le code correspondant à <span class="keyword">la logique métier</span> de l'application. Ils sont aussi utilisés pour organiser <span class="keyword">le code partagé</span> de l'application.</p>
+                        <p style="margin-top: 60px; text-align: left;">Les services sont :</p>
+                        <ul>
+                            <li><span class="keyword">Lazy</span> : paresseux, ils ne sont instanciés que lorsque l'application en a besoin</li>
+                            <li><span class="keyword">Singletons</span> : ils seront instanciés <span class="keyword">une seule fois</span> et cette instance est ensuite utilisée partout</li>
+                        </ul>
+                    </section>
+                    
+                    <section title="AngularJs > Services">
+                        <h3>Les services natifs</h3>
+                        <ul>
+                            <li>
+                                <a href="https://docs.angularjs.org/api/ng/service/$http">$http</a> : permet de faire simplement des <span class="keyword">requêtes AJAX</span>. Renvoie une <span class="keyword">promise</span> avec une callback de succès et une autre d'échec.
+                                <pre><code data-trim class="hljs javascript">
+$http({method: 'GET', url: '/serverUrl'})
+    .success(function(data, status, headers, config){ ... })
+    .error(function(data, status, headers, config){ ... });
+                                </code></pre>
+                            </li>
+                            <li class="fragment roll-in">
+                                <a href="https://docs.angularjs.org/api/ngResource/service/$resource">$resource</a> : service plus haut niveau, utilisé pour interagir avec des <a href="http://www.wikiwand.com/fr/Representational_State_Transfer" title="Wikipedia !">API REST</a>. Nécessite le module <span class="keyword">ngResource.</span>
+                                <pre><code data-trim class="hljs javascript">
+{ 'get':    {method:'GET'},
+  'save':   {method:'POST'},
+  'query':  {method:'GET', isArray:true},
+  'remove': {method:'DELETE'}, 'delete': {method:'DELETE'} };   
+                                </code></pre>
+                                
+                                <pre><code data-trim class="hljs javascript">
+var Poneys = $resource('/races/:raceId/poneys/:poneyId', 
+    { raceId: 24, poneyId: '@id'}, { run: { method: 'PUT' }});
+var fury = Poneys.save({ name: 'Fury Red'});
+                                </code></pre>
+                            </li>
+                        </ul>
+                    </section>
+                    
+                    <section title="AngularJs > Services">
+                        <ul>
+                            <li>
+                                <a href="https://docs.angularjs.org/api/ng/service/$location">$location</a> : rend accessible l'URL de la page actuelle à notre application et expose plusieurs méthodes.
+                                    <pre><code data-trim class="hljs javascript">
+// avec l'url http://example.com/#/some/path?foo=bar&baz=xoxo
+var path = $location.path(); // => "/some/path"
+var searchObject = $location.search(); // => {foo: 'bar', baz: 'xoxo'}
+                                    </code></pre>
+                            </li>
+                            <li class="fragment roll-in">
+                                <a href="https://docs.angularjs.org/api/ng/service/$timeout">$timeout</a> / <a href="https://docs.angularjs.org/api/ng/service/$interval">$interval</a> : permettent de wrapper setTimeout et setInterval dans le <span class="keyword">cycle de vie</span> de l'application angular.
+                                <pre><code data-trim class="hljs javascript">
+var delayedFn = $timeout(function(){ ... }, 1000) // Après 1 seconde.
+var recurringFn = $interval(function(){ ... }, 1000, 0) // Chaque seconde.
+                                </code></pre>
+                            </li>
+                        </ul>
+                        <p class="fragment roll-in">Autres wrappers ($window, $document...) et services natifs : <a href="https://docs.angularjs.org/api/ng/service">https://docs.angularjs.org/api/ng/service</a></p>
+                    </section>
+                </section>
+                
+                <section>
+                    <section title="AngularJs > Promises">
+                        <h2>Les Promises</h2>
+                        <p>
+                            Nouveauté de l'EcmaScript 6, implémentée via le service <span class="keyword">$q</span>.<br>
+                            Utilisée lors de <span class="keyword">traitements asynchrones</span> tels que les requêtes AJAX avec $http.
+                        </p>
+                        <p>Une promise peut avoir deux résultats : <span class="keyword">succès</span> ou <span class="keyword">échec</span>.</p>
+                        <pre><code data-trim class="hljs javascript">
+$http.get(...)
+    .then(function(data){
+        // succès, promise résolue
+    }, function(error){
+        // erreur, promise rejetée
+});
+                        </code></pre>
+                    </section>
+                    
+                    <section title="AngularJs > Promises">
+                        <h3 style="text-transform: lowercase;">$q</h3>
+                        <pre><code data-trim class="hljs javascript" style="max-height: 100%;">
+function asyncGreet(name) {
+    var deferred = $q.defer(); // On crée un objet deferred
+
+    $timeout(function() { // Ici on crée artificiellement un délai
+        deferred.notify('About to greet ' + name + '.');
+    
+        if (okToGreet(name)) {
+            deferred.resolve('Hello, ' + name + '!'); // succès
+        } else {
+            deferred.reject('Greeting ' + name + ' is not allowed.'); // échec
+        }
+    }, 1000);
+    
+    return deferred.promise; // On retourne la promise de deferred
+}
+
+var promise = asyncGreet('Robin Hood'); // La fonction retourne une promise
+promise.then(function(greeting) {
+    alert('Success: ' + greeting); // En cas de succès
+}, function(reason) {
+    alert('Failed: ' + reason); // En cas d'échec
+}, function(update) {
+    alert('Got notification: ' + update); // Indication de progression
+});
+                        </code></pre>
+                    </section>
+                    
+                    <section title="AngularJs > Promises">
+                        <h2>&lt;demo /&gt;</h2>
+                    </section>
+                </section>                
+                
+                <section title="AngularJs > Dependency Injection">
+                    <h2>L'injection de dépendance (DI)</h2>
+                    <p>Pour pouvoir utiliser un composant dans un autre, angular utilise un système d'injection de dépendance.</p>
+                    <pre><code data-trim class="hljs javascript">
+function HomeController($scope, $http) { ... }
+// function HomeController($http, $scope) { ... } // équivalent !
+                    </code></pre>
+                    <pre><code class="hljs javascript">HomeController.toString(); // "function HomeController($scope, $http) { ... }"</code></pre>
+                    <p>Pour éviter les problèmes en cas de minification du javascript, on "annote" les composants :</p>
+                    <pre><code data-trim class="hljs javascript">
+HomeController.$inject = ['$scope', '$http'];
+function HomeController($scope, $http) { ... } // Cette fois l'ordre importe !
+                    </code></pre>
+                </section>
+                
+                <section title="AngularJs > Exercice">
+                    <h2>Time for practice !</h2>
+                    <p><a href="http://www.codecademy.com/fr/learn/learn-angularjs">Learn AngularJS | Codecademy</a> - Unit 3</p>
+                    <p><a href="http://campus.codeschool.com/courses/shaping-up-with-angular-js/">Shaping up with AngularJS | CodeSchool</a> - Level 5</p>
+                </section>
+                
+                <section>
+                    <section title="AngularJs > Routes">
+                        <h2>ngRoute</h2>
+                        <p>
+                            ngRoute est le module angular de base chargé du <span class="keyword">routage</span>. <br>
+                            Il est composé d'une directive <span class="keyword">ngView</span>, d'un <span class="keyword">$routeProvider</span> et de 2 services : <span class="keyword">$route</span> et <span class="keyword">$routeParams</span>.
+                        </p>
+                        <div class="fragment roll-in">
+                            <p><span class="keyword">ngView</span> indique quelle partie de la SPA sera mise à jour :</p>
+                            <pre><code class="hljs xml"><div ng-view></div></code></pre>
+                        </div>
+                    </section>
+                    
+                    <section title="AngularJs > Routes">
+                        <h3>$routeProvider</h3>
+                        <p>$routeProvider permet de déterminer les routes de l'application et de faire le lien entre URL, template et controller.</p>
+                        <pre><code data-trim class="hljs javascript">
+angular
+    .module("monApplicationAngular")
+    .config(configure);
+    
+function configure($routeProvider) {
+    $routeProvider
+        .when('/races/:raceId?', { // raceId est un paramètre facultatif
+            templateUrl: 'races.html',
+            controller: RacesController // Remplace ng-controller="..."
+        })
+        .when('/', {
+            templateUrl: 'poneys.html',
+            controller: PoneysController
+            controllerAs: 'poneys' // Remplace ng-controller="... as ..."
+        })
+        .otherwise('/'); // Si l'url ne correspond pas, redirection
+}
+                        </code></pre>   
+                    </section>
+                    
+                    <section title="AngularJs > Routes">
+                        <h3>$routeParams</h3>
+                        <p>Service permettant de déterminer les paramètres de la route. Combinaison de $location.search() et $location.path().</p>
+                        <pre><code data-trim class="hljs javascript">
+// Avec une url = http://www.example.com/#/races/13?poney=10
+$routeParams ==> { raceId: "13", poney: "10" }
+                        </code></pre>
+                    </section>
+                </section>
+                
+                <section title="AngularJs > Exercice">
+                    <h2>Time for practice !</h2>
+                    <p><a href="http://www.codecademy.com/fr/learn/learn-angularjs">Learn AngularJS | Codecademy</a> - Units 4 / 5</p>
+                </section>
+                
+                <section title="AngularJs > Ressources">
+                    <h2>Ressources utiles</h2>
+                    <ul>
+                        <li><a href="https://github.com/johnpapa/angular-styleguide/blob/master/i18n/fr-FR.md">Le guide de style Angular</a> par <a href="https://twitter.com/john_papa" style="font-style: italic;">@john_papa</a></li>
+                        <li><a href="https://code.angularjs.org/1.3.15/docs/guide">Le guide du développeur</a></li>
+                        <li><a href="https://books.ninja-squad.com/angularjs">Devenez un ninja avec AngularJS</a> - ebook - [fr]</li>
+                        <li><a href="https://www.video2brain.com/fr/angularjs">2 formations vidéos</a> chez <span style="font-style: italic;">video2brain</span> - [fr]</li>
+                        <li><a href="http://www.grafikart.fr/formations/angularjs">Formation vidéo AngularJS</a> par <a href="https://twitter.com/grafikart_fr" style="font-style: italic;">@grafikart_fr</a> - [fr]</li>
+                        <br>
+                        <li><a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Une_r%C3%A9introduction_%C3%A0_JavaScript">Une réintroduction à Javascript</a> sur <span style="font-style: italic;">MDN</span> - [fr]</li>
+                    </ul>
+                </section>
+                
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+
+            // Full list of configuration options available at:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                transition: 'convex', // none/fade/slide/convex/concave/zoom
+
+                // Optional reveal.js plugins
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true },
+                    { src: 'plugin/notes/notes.js', async: true }
+                ]
+            });
+            
+            function signPostEra( event ) {
+				var title = event.currentSlide.attributes.title;
+				if(title) {
+					var era = document.getElementById('step');
+					era.innerText = title.value;
+				}
+			}
+			Reveal.addEventListener( 'ready', function( event ) {
+				signPostEra( event );
+			});
+            
+			Reveal.addEventListener( 'slidechanged', function( event ) {
+				signPostEra( event );
+			});
+
+        </script>
+
+    </body>
+</html>
