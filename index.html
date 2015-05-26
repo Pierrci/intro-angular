@@ -46,6 +46,7 @@
                     <h1>Welcome !</h1>
                     <blockquote>I have nothing to offer but blood, toil, tears, and sweat.</blockquote>
                     <p class="fragment roll-in">W. Churchill, 13 mai 1940</p>
+                    <p><a href="https://twitter.com/pierrci" style="font-size: smaller;">@pierrci</a></p>
                 </section>                
 
                 <section title>
@@ -69,7 +70,7 @@
                             <li>Google</li>
                         </ul>
                         <br><br>
-                        <p style="font-size: initial;">Au sujet de MVC / MVVM :</p>
+                        <p style="font-size: smaller;">Au sujet de MVC / MVVM :</p>
                         <div style="font-size: initial;">
                             <a href="http://www.docdoku.com/blog/2015/02/17/architecturer-ses-applications-js-pattern-mvvm/">http://www.docdoku.com/blog/2015/02/17/architecturer-ses-applications-js-pattern-mvvm/</a>
                             <a href="http://stackoverflow.com/questions/667781/what-is-the-difference-between-mvc-and-mvvm/">http://stackoverflow.com/questions/667781/what-is-the-difference-between-mvc-and-mvvm/</a>
@@ -145,9 +146,15 @@
 &lt;/html&gt;
                         </code></pre>
                         <ul>
-                            <li class="fragment roll-in"><span class="keyword">ng-app</span> : directive de bootstrap ("démarrage"), indique à angular où se situe l'application dans la page HTML.</li>
-                            <li class="fragment roll-in"><span class="keyword">ng-model</span> : directive qui associe ("bind") la valeur d'un champ à une variable.</li>
-                            <li class="fragment roll-in"><span class="keyword">{{ nameModel }}</span> : expression angular, elle est évaluée par angular et son résultat est inséré dans la page.</li>
+                            <li class="fragment roll-in" style="margin-bottom: 10px;">
+                                <span class="keyword">ng-app</span> : directive de bootstrap ("démarrage"), indique à angular où se situe l'application dans la page HTML.
+                            </li>
+                            <li class="fragment roll-in" style="margin-bottom: 10px;">
+                                <span class="keyword">ng-model</span> : directive qui associe ("bind") la valeur d'un champ à une variable.                                
+                            </li>
+                            <li class="fragment roll-in" style="margin-bottom: 10px;">
+                                <span class="keyword">{{ nameModel }}</span> : expression angular, elle est évaluée par angular et son résultat est inséré dans la page.
+                            </li>
                         </ul>
                     </section>
                     
@@ -465,10 +472,94 @@ vm.ninjas = [jb, cyril, agnes, cedric];
                     </section>
                 </section>
                 
-                <section title="AngularJs > Exercice">
+                <section title="AngularJs > Exercices">
                     <h2>Time for practice !</h2>
-                    <p><a href="http://www.codecademy.com/fr/learn/learn-angularjs">Learn AngularJS | Codecademy</a> - Units 1 / 2</p>
-                    <p><a href="http://campus.codeschool.com/courses/shaping-up-with-angular-js/">Shaping up with AngularJS | CodeSchool</a> - Levels 1 / 2 / 3 / 4</p>
+                    <p><a href="http://www.codecademy.com/fr/learn/learn-angularjs">Learn AngularJS | Codecademy</a> - Unit 1</p>
+                    <p><a href="http://campus.codeschool.com/courses/shaping-up-with-angular-js/">Shaping up with AngularJS | CodeSchool</a> - Levels 1 / 2 / 3</p>
+                </section>
+                
+                <section>
+                    <section title="AngularJs > Directives custom">
+                        <h2>Créer ses directives</h2>
+                        <p>L'avenir du web est aux <a href="http://webcomponents.org/">Web Components</a> : découpage des fonctionnalités en modules réutilisables indépendamment.</p>
+                        <p>Les directives sont un avant-goût et permettent d'implémenter une partie de cette logique.</p>
+                        <br>
+                        <div class="fragment roll-in">
+                        <pre><code data-trim class="hljs xml">
+<div>
+    <h1 class="title">{{ book.title }}</h1>
+    <h2 class="author">{{ book.author }}</h2>
+    <div class="extract">{{ book.extract }}</div>
+</div>
+                        </code></pre>
+                        <p>peut devenir :</p>
+                        <pre><code data-trim class="hljs xml">
+<book-details data-book="main.book"></book-details>
+                        </code></pre>
+                        </div>    
+                    </section>
+                    
+                    <section title="AngularJs > Directives custom">
+                        <p>Fichier <i>bookDetails.directive.js</i> :</p>
+                        <pre><code data-trim class="hljs javascript">
+angular.module('myApp')
+       .directive('bookDetails', bookDetails);  // camelCase côté JS !
+       
+function bookDetails() {
+    return {            // Une directive retourne un objet de "configuration"
+        restrict: 'E',  // La directive doit être appelée sous forme d'élément
+        scope: {        // On crée un nouveau scope isolé propre à la directive
+            book: '='   // On récupère l'objet passé à l'attribut correspondant
+        },
+        templateUrl: 'bookDetails.tpl.html',  // Indique où aller chercher le HTML
+    };
+}
+                        </code></pre>
+                        <p>Fichier <i>bookDetails.tpl.html</i> :</p>
+                        <pre><code data-trim class="hljs xml">
+<div>
+    <h1 class="title">{{ book.title }}</h1>
+    <h2 class="author">{{ book.author }}</h2>
+    <div class="extract">{{ book.extract }}</div>
+</div>
+                        </code></pre>
+                    </section>
+                    
+                    <section title="AngularJs > Directives custom">
+                        <ul>    
+                            <li style="margin-bottom: 10px;">
+                                <span class="keyword">restrict</span> : indique comment doit être appelée la directive dans le HTML - A pour attribut, E pour élement et C pour classe CSS. On peut les combiner, par exemple '<span class="keyword">AEC</span>'.
+                            </li>
+                            <li style="margin-bottom: 10px;">
+                                <span class="keyword">scope</span> : pour créer un scope isolé pour la directive. On récupère les éléments du scope englobant via les attributs. '<span class="keyword">@</span>' pour <span class="keyword">one-way binding</span>, '<span class="keyword">=</span>' pour <span class="keyword">two-way binding</span>.
+                            </li>
+                            <li style="margin-bottom: 10px;">
+                                <span class="keyword">controller</span> : une directive peut avoir son propre controller.
+                            </li>
+                            <li>
+                                <span class="keyword">controllerAs</span> : permet de spécifier un alias pour le controller, comme avec <i>ng-controller = ... as ...</i>
+                                <pre><code data-trim class="hljs javascript">
+...
+controller: function () {
+    var vm = this;    
+    vm.selectBook = function () { ... }
+},
+controllerAs: 'bookDetails'
+...
+                                </code></pre>
+                            </li>
+                        </ul>
+                    </section>
+                    
+                    <section title="AngularJs > Directives custom">
+                        <h2>&lt;demo /&gt;</h2>
+                    </section>
+                </section>
+                
+                <section title="AngularJs > Exercices">
+                    <h2>Time for practice !</h2>
+                    <p><a href="http://www.codecademy.com/fr/learn/learn-angularjs">Learn AngularJS | Codecademy</a> - Unit 2</p>
+                    <p><a href="http://campus.codeschool.com/courses/shaping-up-with-angular-js/">Shaping up with AngularJS | CodeSchool</a> - Level 4</p>
                 </section>
                 
                 <section>
@@ -601,7 +692,7 @@ function HomeController($scope, $http) { ... } // Cette fois l'ordre importe !
                     </code></pre>
                 </section>
                 
-                <section title="AngularJs > Exercice">
+                <section title="AngularJs > Exercices">
                     <h2>Time for practice !</h2>
                     <p><a href="http://www.codecademy.com/fr/learn/learn-angularjs">Learn AngularJS | Codecademy</a> - Unit 3</p>
                     <p><a href="http://campus.codeschool.com/courses/shaping-up-with-angular-js/">Shaping up with AngularJS | CodeSchool</a> - Level 5</p>
@@ -654,7 +745,7 @@ $routeParams ==> { raceId: "13", poney: "10" }
                     </section>
                 </section>
                 
-                <section title="AngularJs > Exercice">
+                <section title="AngularJs > Exercices">
                     <h2>Time for practice !</h2>
                     <p><a href="http://www.codecademy.com/fr/learn/learn-angularjs">Learn AngularJS | Codecademy</a> - Units 4 / 5</p>
                 </section>
@@ -662,13 +753,13 @@ $routeParams ==> { raceId: "13", poney: "10" }
                 <section title="AngularJs > Ressources">
                     <h2>Ressources utiles</h2>
                     <ul>
-                        <li><a href="https://github.com/johnpapa/angular-styleguide/blob/master/i18n/fr-FR.md">Le guide de style Angular</a> par <a href="https://twitter.com/john_papa" style="font-style: italic;">@john_papa</a></li>
                         <li><a href="https://code.angularjs.org/1.3.15/docs/guide">Le guide du développeur</a></li>
                         <li><a href="https://books.ninja-squad.com/angularjs">Devenez un ninja avec AngularJS</a> - ebook - [fr]</li>
-                        <li><a href="https://www.video2brain.com/fr/angularjs">2 formations vidéos</a> chez <span style="font-style: italic;">video2brain</span> - [fr]</li>
+                        <li><a href="https://www.video2brain.com/fr/angularjs">2 formations vidéos</a> chez <i>video2brain</i> - [fr]</li>
                         <li><a href="http://www.grafikart.fr/formations/angularjs">Formation vidéo AngularJS</a> par <a href="https://twitter.com/grafikart_fr" style="font-style: italic;">@grafikart_fr</a> - [fr]</li>
+                        <li><a href="https://github.com/johnpapa/angular-styleguide/blob/master/i18n/fr-FR.md">Le guide de style Angular</a> par <a href="https://twitter.com/john_papa" style="font-style: italic;">@john_papa</a> - [fr]</li>
                         <br>
-                        <li><a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Une_r%C3%A9introduction_%C3%A0_JavaScript">Une réintroduction à Javascript</a> sur <span style="font-style: italic;">MDN</span> - [fr]</li>
+                        <li><a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Une_r%C3%A9introduction_%C3%A0_JavaScript">Une réintroduction à Javascript</a> sur <i>MDN</span> - [fr]</li>
                     </ul>
                 </section>
                 

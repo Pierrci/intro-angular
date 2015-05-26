@@ -1,5 +1,5 @@
 # intro-angular
-Une présentation d'Angular destinée à un public débutant en javascript et se concentrant sur l'aspect "pratique", dans le cadre d'une formation de stage.  
+Une présentation d'Angular destinée à un public débutant en javascript et se concentrant sur l'aspect "pratique", dans le cadre d'une formation de stage. Elle n'a absolument pas la prétention d'être exhaustive.  
 Je ne peux que conseiller avant toute chose la lecture de la [réintroduction à javascript](https://developer.mozilla.org/fr/docs/Web/JavaScript/Une_r%C3%A9introduction_%C3%A0_JavaScript) sur MDN.
 
 ## Quelques ressources
