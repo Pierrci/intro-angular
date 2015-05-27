@@ -17,9 +17,11 @@
         <link rel="stylesheet" href="css/reveal.css">
         <link rel="stylesheet" href="css/custom.css">
         <link rel="stylesheet" href="css/theme/night.css" id="theme">
+<!--        <link rel="stylesheet" href="css/theme/league.css" id="theme">-->
 
         <!-- Code syntax highlighting -->
         <link rel="stylesheet" href="lib/css/railscasts.css">
+<!--        <link rel="stylesheet" href="lib/css/sunburst.css">-->
 
         <!-- Printing and PDF exports -->
         <script>
@@ -531,24 +533,36 @@ function bookDetails() {
                                 <span class="keyword">restrict</span> : indique comment doit être appelée la directive dans le HTML - A pour attribut, E pour élement et C pour classe CSS. On peut les combiner, par exemple '<span class="keyword">AEC</span>'.
                             </li>
                             <li style="margin-bottom: 10px;">
-                                <span class="keyword">scope</span> : pour créer un scope isolé pour la directive. On récupère les éléments du scope englobant via les attributs. '<span class="keyword">@</span>' pour <span class="keyword">one-way binding</span>, '<span class="keyword">=</span>' pour <span class="keyword">two-way binding</span>.
-                            </li>
+                                <span class="keyword">scope</span> : crée un scope isolé pour la directive. On récupère les éléments du scope englobant via les attributs. '<span class="keyword">@</span>' pour passer une valeur (chaîne de caractères), '<span class="keyword">=</span>' pour du <span class="keyword">two-way binding</span> sur un objet.
+                            </li>                            
+                        </ul>
+                    </section>
+                    
+                    <section title="AngularJs > Directives custom">
+                        <ul>
                             <li style="margin-bottom: 10px;">
                                 <span class="keyword">controller</span> : une directive peut avoir son propre controller.
                             </li>
-                            <li>
+                            <li style="margin-bottom: 10px;">
                                 <span class="keyword">controllerAs</span> : permet de spécifier un alias pour le controller, comme avec <i>ng-controller = ... as ...</i>
+                            </li>
+                            <li>
+                                <span class="keyword">bindToController</span> : indissociable de <i>ControllerAs</i>, lie les propriétés au controller plutôt qu'au scope.
                                 <pre><code data-trim class="hljs javascript">
 ...
 controller: function () {
     var vm = this;    
     vm.selectBook = function () { ... }
 },
-controllerAs: 'bookDetails'
+controllerAs: 'bookDetails',
+bindToController: true
 ...
                                 </code></pre>
                             </li>
                         </ul>
+                        <p style="font-size: smaller;">
+                            <a href="https://docs.angularjs.org/api/ng/service/$compile">https://docs.angularjs.org/api/ng/service/$compile</a>
+                        </p>
                     </section>
                     
                     <section title="AngularJs > Directives custom">
