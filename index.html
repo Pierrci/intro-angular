@@ -230,7 +230,7 @@ function HomeController() {
     }
 }
                         </code></pre>
-                        <p>Tout ce qui est dans le <span class="keyword">this</span> de HomeController est lié au scope associé au controller</p>
+                        <p>On "<span class="keyword">bind</span>" les méthodes et variables qui nous intéressent au <span class="keyword">this</span> de HomeController. Tout ce qui y est lié apparaîtra dans le scope.</p>
                     </section>
                     
                     <section title="AngularJs > Controllers">
@@ -244,7 +244,7 @@ function HomeController() {
 &lt;/body&gt;
                         </code></pre>
                         <div class="fragment roll-in">
-                            <p>Ici on utilise la syntaxe <span class="keyword">controllerAs</span>, en spécifiant un alias pour notre controller, ici <span class="keyword">home</span></p>
+                            <p>On utilise la syntaxe <span class="keyword">controllerAs</span>, indissociable du binding au scope via le <span class="keyword">this</span>, en spécifiant un alias pour notre controller : <span class="keyword">home</span></p>
                             <div style="font-size: smaller; margin-top: 40px;">
                                 <a href="http://www.johnpapa.net/do-you-like-your-angular-controllers-with-or-without-sugar/">Do You Like Your Angular Controllers with or without Sugar?</a> - <a href="https://twitter.com/John_Papa" style="font-style: italic;">@John_Papa</a>
                             </div>
@@ -253,7 +253,7 @@ function HomeController() {
                     
                     <section title="AngularJs > $scope">
                         <h3>$scope</h3>
-                        <p>Dans le javascript, on aurait pu aussi lier le modèle à <span class="keyword">$scope</span> directement, sans utiliser la syntaxe controllerAs :</p>
+                        <p>Dans le javascript, on aurait pu aussi lier le modèle à <span class="keyword">$scope</span> au lieu de <span class="keyword">this</span>, sans utiliser la syntaxe controllerAs :</p>
                         <pre><code data-trim class="hljs javascript">
 function HomeController($scope) {
     $scope.user = {
