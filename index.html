@@ -6,8 +6,9 @@
 
         <title>Intro à Angular</title>
 
-        <meta name="description" content="Une présentation d'Angular destinée à un public débutant en javascript et se concentrant sur l'aspect 'pratique'">
+        <meta name="description" content="Une présentation d'Angular en français destinée à un public débutant en javascript et se concentrant sur l'aspect 'pratique'">
         <meta name="author" content="Pierric Cistac">
+        <meta name="keywords" content="anuglar, angularjs, français, présentation, introduction, javascript">
 
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -702,7 +703,7 @@ function HomeController($scope, $http) { ... }
                     <p>Pour éviter les problèmes en cas de minification du javascript, on "annote" les composants :</p>
                     <pre><code data-trim class="hljs javascript">
 HomeController.$inject = ['$scope', '$http'];
-function HomeController($scope, $http) { ... } // Cette fois l'ordre importe !
+function HomeController($scope, $http) { ... } // Il vaut mieux garder le même ordre...
                     </code></pre>
                 </section>
                 
@@ -737,11 +738,11 @@ function configure($routeProvider) {
     $routeProvider
         .when('/races/:raceId?', { // raceId est un paramètre facultatif
             templateUrl: 'races.html',
-            controller: RacesController // Remplace ng-controller="..."
+            controller: 'RacesController' // Remplace ng-controller="..."
         })
         .when('/', {
             templateUrl: 'poneys.html',
-            controller: PoneysController
+            controller: 'PoneysController'
             controllerAs: 'poneys' // Remplace ng-controller="... as ..."
         })
         .otherwise('/'); // Si l'url ne correspond pas, redirection
@@ -773,7 +774,7 @@ $routeParams ==> { raceId: "13", poney: "10" }
                         <li><a href="http://www.grafikart.fr/formations/angularjs">Formation vidéo AngularJS</a> par <a href="https://twitter.com/grafikart_fr" style="font-style: italic;">@grafikart_fr</a> - [fr]</li>
                         <li><a href="https://github.com/johnpapa/angular-styleguide/blob/master/i18n/fr-FR.md">Le guide de style Angular</a> par <a href="https://twitter.com/john_papa" style="font-style: italic;">@john_papa</a> - [fr]</li>
                         <br>
-                        <li><a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Une_r%C3%A9introduction_%C3%A0_JavaScript">Une réintroduction à Javascript</a> sur <i>MDN</span> - [fr]</li>
+                        <li><a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Une_r%C3%A9introduction_%C3%A0_JavaScript">Une réintroduction à Javascript</a> sur <i>MDN</i></span> - [fr]</li>
                     </ul>
                 </section>
                 
@@ -781,7 +782,7 @@ $routeParams ==> { raceId: "13", poney: "10" }
         </div>
 
         <script src="lib/js/head.min.js"></script>
-        <script src="js/reveal.js"></script>
+        <script src="js/reveal.min.js"></script>
 
         <script>
 
