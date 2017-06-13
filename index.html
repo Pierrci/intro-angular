@@ -81,8 +81,8 @@
                     </section>
                     
                     <section title="AngularJS > Introduction">
-                        <p>Aujourd'hui, version 1.X - <a href="https://angularjs.org/">https://angularjs.org/</a></p>
-                        <p>Demain, version 2.X - <a href="https://angular.io/">https://angular.io/</a></p>
+                        <p>Version 1.X : <a href="https://angularjs.org/">https://angularjs.org/</a></p>
+                        <p>Version 2.X et + : <a href="https://angular.io/">https://angular.io/</a></p>
                         <div class="fragment roll-in">
                             <blockquote>AngularJS however is not an example of developers maintaining backwards compatibility. It takes pleasure in starting over. In fact, you can just about rip up your old Angular apps now. It’s for your own good.</blockquote>
                             <p style="font-size: initial;"><a href="https://twitter.com/edwardcgordon">@EdwardCGordon</a> - <a href="http://bit.ly/1QJbGBD">packtpub.com</a></p>
@@ -312,26 +312,26 @@ function HomeController($scope) {
                         <h2>Les directives</h2>
                         <p>ngApp, ngController, ngModel, ... sont des directives</p>
                         <p>Ce sont des marqueurs positionnés sur des <span class="keyword">éléments du DOM</span> qui indiquent à angular quel comportement attacher à un élément et/ou quelle transformation y apporter</p>
-                        <p>De nombreuses directives sont intégrées nativement : <a href="https://code.angularjs.org/1.4.11/docs/api/ng/directive" title="Liste des directives de base">https://code.angularjs.org/1.4.11/docs/api/ng/directive</a></p>
+                        <p>De nombreuses directives sont intégrées nativement : <a href="https://docs.angularjs.org/api/ng/directive" title="Liste des directives de base">https://docs.angularjs.org/api/ng/directive</a></p>
                     </section>
                     
                     <section title="AngularJs > Directives">
                         <h3>Directives de template</h3>
                         <ul>
                             <li>
-                                <a href="https://code.angularjs.org/1.4.11/docs/api/ng/directive/ngIf">ngIf</a> : insère ou pas un élément dans le DOM en fonction de la valeur de l'attribut
-                                <pre><code class="hljs xml"><div ng-if="isVisible">I'm gonna disappear</div></code></pre>
+                                <a href="https://docs.angularjs.org/api/ng/directive/ngIf">ngIf</a> : insère ou pas un élément dans le DOM en fonction de la valeur de l'attribut
+                                <pre><code class="hljs xml"><div ng-if="vm.isVisible">I'm gonna disappear</div></code></pre>
                             </li>
                             <li class="fragment roll-in">
-                                <a href="https://code.angularjs.org/1.4.11/docs/api/ng/directive/ngRepeat">ngRepeat</a> : permet de parcourir les éléments d'un tableau et d'afficher leur valeur
-                                <pre><code class="hljs xml"><div ng-repeat="user in users">{{ user.name }}</div></code></pre>                                
+                                <a href="https://docs.angularjs.org/api/ng/directive/ngRepeat">ngRepeat</a> : permet de parcourir les éléments d'un tableau et d'afficher leur valeur
+                                <pre><code class="hljs xml"><div ng-repeat="user in vm.users">{{ user.name }}</div></code></pre>                                
                             </li>
                             <li class="fragment roll-in">
-                                <a href="https://code.angularjs.org/1.4.11/docs/api/ng/directive/ngSwitch">ngSwitch</a> : modifie le contenu d'un élément suivant la valeur d'une expression
+                                <a href="https://docs.angularjs.org/api/ng/directive/ngSwitch">ngSwitch</a> : modifie le contenu d'un élément suivant la valeur d'une expression
                                 <pre><code data-trim class="hljs xml">
-<div ng-switch="isEditable">
-    <div ng-switch-when="false">Name : {{ user.name }}</div>
-    <div ng-switch-when="true"><input type="text" ng-model="user.name"/></div>
+<div ng-switch="vm.isEditable">
+    <div ng-switch-when="false">Name : {{ vm.user.name }}</div>
+    <div ng-switch-when="true"><input type="text" ng-model="vm.user.name"/></div>
 </div>
                                 </code></pre>                                                                    
                             </li>
@@ -342,19 +342,19 @@ function HomeController($scope) {
                         <h3>Directives de style</h3>
                         <ul>
                             <li>
-                                <a href="https://code.angularjs.org/1.4.11/docs/api/ng/directive/ngShow">ngShow</a> / <a href="https://code.angularjs.org/1.4.11/docs/api/ng/directive/ngHide">ngHide</a> : modifie la visibilité d'un élément du DOM suivant la valeur de l'expression en paramètre
+                                <a href="https://docs.angularjs.org/api/ng/directive/ngShow">ngShow</a> / <a href="https://docs.angularjs.org/api/ng/directive/ngHide">ngHide</a> : modifie la visibilité d'un élément du DOM suivant la valeur de l'expression en paramètre
                                 <pre><code data-trim class="hljs xml">
-<div ng-hide="hidden">Hello hide</div>
-<div ng-show="hidden">Hello show</div>
+<div ng-hide="vm.hidden">Hello hide</div>
+<div ng-show="vm.hidden">Hello show</div>
                                 </code></pre>                                
                             </li>
                             <li class="fragment roll-in">
-                                <a href="https://code.angularjs.org/1.4.11/docs/api/ng/directive/ngClass">ngClass</a> : conditionne dynamiquement les classes d'un élément du DOM suivant la valeur d'expressions
-                                <pre><code class="hljs xml"><p ng-class="{bold: important, red: error}">Map Syntax Example</p></code></pre>
+                                <a href="https://docs.angularjs.org/api/ng/directive/ngClass">ngClass</a> : conditionne dynamiquement les classes d'un élément du DOM suivant la valeur d'expressions
+                                <pre><code class="hljs xml"><p ng-class="{bold: vm.important, red: vm.error}">Map Syntax Example</p></code></pre>
                             </li>
                             <li class="fragment roll-in">
-                                <a href="https://code.angularjs.org/1.4.11/docs/api/ng/directive/ngDisabled">ngDisabled</a> : modifie la valeur de l'attribut disabled suivant l'expression spécifiée
-                                <pre><code class="hljs xml"><button ng-disabled="isDisabled">Disabled</button></code></pre>     
+                                <a href="https://docs.angularjs.org/api/ng/directive/ngDisabled">ngDisabled</a> : modifie la valeur de l'attribut disabled suivant l'expression spécifiée
+                                <pre><code class="hljs xml"><button ng-disabled="vm.isDisabled">Disabled</button></code></pre>     
                             </li>
                         </ul>
                     </section>
@@ -363,21 +363,21 @@ function HomeController($scope) {
                         <h3>Directives d'action</h3>
                         <ul>
                             <li>
-                                <a href="https://code.angularjs.org/1.4.11/docs/api/ng/directive/ngClick">ngClick</a> : permet d'appeler une fonction ou d'évaluer une expression lors d'un clic sur l'élément
+                                <a href="https://docs.angularjs.org/api/ng/directive/ngClick">ngClick</a> : permet d'appeler une fonction ou d'évaluer une expression lors d'un clic sur l'élément
                                 <pre><code data-trim class="hljs xml">
-<div ng-click="click()">Click me!</div>
-<button ng-click="count = count + 1" ng-init="count = 0">Increment</button>
+<div ng-click="vm.click()">Click me!</div>
+<button ng-click="vm.count = vm.count + 1" ng-init="vm.count = 0">Increment</button>
                                 </code></pre>
                             </li>
                             <li class="fragment roll-in">
-                                <a href="https://code.angularjs.org/1.4.11/docs/api/ng/directive/ngKeydown">ngKeydown</a> / <a href="https://code.angularjs.org/1.4.11/docs/api/ng/directive/ngKeyup">ngKeyup</a> : associe des actions à des événements claviers
-                                <pre><code class="hljs xml"><input type="text" ng-keydown="down()" ng-keyup="up()"></code></pre>                                     
+                                <a href="https://docs.angularjs.org/api/ng/directive/ngKeydown">ngKeydown</a> / <a href="https://docs.angularjs.org/api/ng/directive/ngKeyup">ngKeyup</a> : associe des actions à des événements claviers
+                                <pre><code class="hljs xml"><input type="text" ng-keydown="vm.down()" ng-keyup="vm.up()"></code></pre>                                     
                             </li>       
                             <li class="fragment roll-in">
-                                <a href="https://code.angularjs.org/1.4.11/docs/api/ng/directive/ngSubmit">ngSubmit</a> : spécifie l'action à effectuer pour l'envoi d'un formulaire. Ne pas combiner avec ngClick !
+                                <a href="https://docs.angularjs.org/api/ng/directive/ngSubmit">ngSubmit</a> : spécifie l'action à effectuer pour l'envoi d'un formulaire. Ne pas combiner avec ngClick !
                                 <pre><code data-trim class="hljs xml">
-<form ng-submit="submit()" ng-controller="SimpleFormController">
-    <input type="text" ng-model="text" name="text" />
+<form ng-submit="vm.submit()" ng-controller="SimpleFormController as vm">
+    <input type="text" ng-model="vm.text" name="text" />
     <input type="submit" id="submit" value="Submit" />
 </form>
                                 </code></pre>
@@ -424,8 +424,8 @@ vm.ninjas = [jb, cyril, agnes, cedric];
                         </code></pre>
                         <p>Avec le HTML suivant :</p>
                         <pre><code data-trim class="hljs xml">
-<p>{{ ninjas | orderBy:'name' | limitTo:2 }}</p>
-<div ng-repeat="ninja in ninjas">
+<p>{{ vm.ninjas | orderBy:'name' | limitTo:2 }}</p>
+<div ng-repeat="ninja in vm.ninjas">
     {{ ninja.birth | date:'yyyy' }}
 </div>
                         </code></pre>
@@ -448,7 +448,7 @@ vm.ninjas = [jb, cyril, agnes, cedric];
 <input type="text" ng-model="searchText">
 <table id="searchTextResults">
     <tr><th>Name</th><th>Birth date</th></tr>
-    <tr ng-repeat="ninja in ninjas | filter:searchText">
+    <tr ng-repeat="ninja in vm.ninjas | filter:searchText">
         <td>{{ friend.name }}</td>
         <td>{{ friend.birth | date:'dd/MM/yyyy' }}</td>
     </tr>
@@ -462,7 +462,7 @@ vm.ninjas = [jb, cyril, agnes, cedric];
 <label>Equality <input type="checkbox" ng-model="strict"></label><br>
 <table id="searchObjResults">
     <tr><th>Name</th><th>Gender</th></tr>
-    <tr ng-repeat="ninja in ninjas | filter:search:strict">
+    <tr ng-repeat="ninja in vm.ninjas | filter:search:strict">
         <td>{{ ninja.name }}</td>
         <td>{{ ninja.gender }}</td>
     </tr>
@@ -768,7 +768,7 @@ $routeParams ==> { raceId: "13", poney: "10" }
                 <section title="AngularJs > Ressources">
                     <h2>Ressources utiles</h2>
                     <ul>
-                        <li><a href="https://code.angularjs.org/1.4.11/docs/guide">Le guide du développeur</a></li>
+                        <li><a href="https://docs.angularjs.org/guide">Le guide du développeur</a></li>
                         <li><a href="https://books.ninja-squad.com/angularjs">Devenez un ninja avec AngularJS</a> - ebook - [fr]</li>
                         <li><a href="https://www.video2brain.com/fr/angularjs">2 formations vidéos</a> chez <i>video2brain</i> - [fr]</li>
                         <li><a href="http://www.grafikart.fr/formations/angularjs">Formation vidéo AngularJS</a> par <a href="https://twitter.com/grafikart_fr" style="font-style: italic;">@grafikart_fr</a> - [fr]</li>
