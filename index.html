@@ -449,8 +449,8 @@ vm.ninjas = [jb, cyril, agnes, cedric];
 <table id="searchTextResults">
     <tr><th>Name</th><th>Birth date</th></tr>
     <tr ng-repeat="ninja in vm.ninjas | filter:searchText">
-        <td>{{ friend.name }}</td>
-        <td>{{ friend.birth | date:'dd/MM/yyyy' }}</td>
+        <td>{{ ninja.name }}</td>
+        <td>{{ ninja.birth | date:'dd/MM/yyyy' }}</td>
     </tr>
 </table>
                         </code></pre>
